@@ -16,6 +16,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+  
+  /*Scroll Breath Animation on all elements*/
+  
+.float {
+  transition: transform 0.2s linear;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* subtle breathing float scrolling down */
+.breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
 
 * {
   margin: 0;
@@ -130,6 +157,10 @@ h1 {
       <img src="image2.jpg" class="bg-image">
       <img src="image3.jpg" class="bg-image">
     </div>
+  
+  /*Reveal the breathing float animation*/
+  
+<div class="glass reveal breathe float">
 
   </div>
 
@@ -201,6 +232,37 @@ footer {
 
 </style>
 </head>
+<script>
+
+/* Reveal on scroll */
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.2 });
+
+revealElements.forEach(el => observer.observe(el));
+
+<script>
+
+/* Reveal on scroll */
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.2 });
+
+revealElements.forEach(el => observer.observe(el));
+
+</script>
 
 <body>
 
@@ -274,7 +336,6 @@ body {
   min-height: 100vh;
   background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #facc15, #fb923c);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -405,6 +466,7 @@ footer {
 }
 
 </style>
+  
 </head>
 
 <body>
